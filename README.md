@@ -12,11 +12,15 @@ Agents can request a name and destination without receiving the value in the too
 
 Requires Amp with [plugin support](https://ampcode.com/docs/plugin-api) and the `amp` CLI available to the plugin. This release targets Linux Amp orbs and other POSIX hosts; Windows descendant-process cleanup is not supported.
 
+From the project where you want to use it:
+
 ```bash
-amp plugins add https://raw.githubusercontent.com/jkudish/amp-collect-secret/v0.1.0/collect-secret.ts
+mkdir -p .amp/plugins
+curl -fsSL https://raw.githubusercontent.com/jkudish/amp-collect-secret/v0.1.1/collect-secret.ts -o .amp/plugins/collect-secret.ts
+amp plugins list
 ```
 
-`amp plugins add` installs the plugin at system scope by default. Review [the source](collect-secret.ts) before installing. If you already have a personal plugin registering `collect_secret`, use that installation instead of adding a duplicate.
+Review [the source](collect-secret.ts) before installing it. `amp plugins list` should show `.amp/plugins/collect-secret.ts active`; run `plugins: reload` in an open Amp session to use it there. To make it available in all your projects, save the file to `~/.config/amp/plugins/collect-secret.ts` instead. If you already have a personal plugin registering `collect_secret`, use that installation instead of adding a duplicate. The current `amp plugins add` command does not accept GitHub raw-file URLs.
 
 ## Use
 
